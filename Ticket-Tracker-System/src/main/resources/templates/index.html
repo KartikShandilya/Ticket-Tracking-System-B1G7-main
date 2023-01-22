@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html xmlns:th="www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
+      crossorigin="anonymous"
+    />
+    <title>TICKETER: Your Ticket Raiser</title>
+  </head>
+  <body>
+    <nav
+      class="navbar navbar-expand-lg text-bg-primary navbar-dark fw-semibold"
+    >
+      <div class="container-fluid">
+        <a
+          class="navbar-brand fw-bold ms-3"
+          href="/index.html"
+          >TICKETER</a
+        >
+        <div class="d-flex justify-content-end me-3">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link active" href="#">Tickets</a>
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link active"
+                href="/add"
+                >New Ticket</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="search-control">
+      <label
+        for="exampleFormControlTextarea1"
+        class="form-label fw-semibold fs-2 ms-5 mt-1"
+        >List of Tickets</label
+      >
+      
+      
+      <div class="col-sm-3">
+        <div class="input-group ms-5 mb-3">
+			 <form th:action="@{/}">
+          <input type="text" name="keyword" id="keyword" th:value="${keyword}"  />
+          &nbsp;
+    <input type="submit" value="Search" />
+			 </form>
+        </div>
+      </div>
+    </div>
+    <div class="px-5">
+      <table class="table table-bordered table-striped">
+        <thead class="table-dark">
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Ticket Title</th>
+            <th scope="col">Ticket Short Description</th>
+            <th scope="col">Ticket Created on</th>
+            <th scope="col">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:each="ticket : ${Tickets}">
+                <td th:text="${ticket.id}"></td>
+                <td th:text="${ticket.title}"></td>
+                <td th:text="${ticket.description}"></td>
+               <td th:text="${ticket.dateCreated}"></td>
+               
+                
+            <td>
+              
+                
+            <a th:href="@{/edit/{id}(id=${ticket.id})}"    class="btn btn-primary me-1 btn-sm"
+                >Edit</a >
+              <a th:href="@{/delete/{id}(id=${ticket.id})}" class="btn btn-danger me-1 btn-sm">Delete</a>
+              <a th:href="@{/view/{id}(id=${ticket.id})}" class="btn btn-secondary btn-sm">View</a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+      crossorigin="anonymous">
+    </script>
+  </body>
+</html>
